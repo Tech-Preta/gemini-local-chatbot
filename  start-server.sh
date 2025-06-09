@@ -38,4 +38,4 @@ echo "---------------------------"
 # -p 8080: Serve on port 8080
 # -c-1: Disable caching, which is useful for development
 echo "Starting http-server on port 8080..."
-http-server . -p 8080 -c-1
+exec http-server . -p 8080 -c-1
