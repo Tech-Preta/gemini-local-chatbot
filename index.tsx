@@ -26,6 +26,16 @@ let sendButtonElement: HTMLButtonElement | null = null;
 let currentAiMessageElement: HTMLDivElement | null = null;
 let accumulatedAiResponse = '';
 
+/**
+ * Displays a message in the chat history, rendering AI responses as markdown and user messages as plain text.
+ *
+ * @param text - The message content to display.
+ * @param sender - Indicates whether the message is from the AI or the user.
+ * @param isStreamingChunk - If true, appends the text as a streaming AI response; otherwise, displays as a complete message.
+ *
+ * @remark
+ * AI messages are parsed and rendered as markdown, while user messages are shown as plain text. Streaming AI responses are accumulated and updated in a single message bubble.
+ */
 async function displayMessage(
   text: string,
   sender: 'ai' | 'user',
@@ -72,6 +82,11 @@ async function displayMessage(
   chatHistoryElement.scrollTop = chatHistoryElement.scrollHeight;
 }
 
+/**
+ * Enables or disables the chat input and send button based on loading state.
+ *
+ * @param isLoading - Whether the chat is currently processing a message.
+ */
 function setLoadingState(isLoading: boolean): void {
   if (chatInputElement) {
     chatInputElement.disabled = isLoading;
@@ -82,6 +97,11 @@ function setLoadingState(isLoading: boolean): void {
   }
 }
 
+/**
+ * Handles sending the user's message to the AI and manages the display of both user and AI responses.
+ *
+ * Validates input and configuration, displays the user's message, streams and displays the AI's response in real time, and manages UI state and error handling throughout the process.
+ */
 async function handleSendMessage(): Promise<void> {
   if (!chatInputElement || !chat || !API_KEY) {
     if(!API_KEY) {
@@ -121,6 +141,11 @@ async function handleSendMessage(): Promise<void> {
   }
 }
 
+/**
+ * Initializes the chat application, setting up UI elements, event listeners, and the Gemini AI chat instance.
+ *
+ * Displays a welcome message on successful initialization. If required UI elements or the API key are missing, or if initialization fails, displays an error message and disables user input.
+ */
 async function initChatApp(): Promise<void> {
   chatHistoryElement = document.getElementById('chat-history');
   chatInputElement = document.getElementById('chat-input') as HTMLInputElement | null;
