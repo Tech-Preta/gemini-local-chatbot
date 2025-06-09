@@ -102,9 +102,9 @@ async function handleSendMessage(): Promise<void> {
   setLoadingState(true);
 
   try {
-    const responseStream = await chat.sendMessageStream({ message: userInput });
-    for await (const chunk of responseStream) {
-      const chunkText = chunk.text;
+    const result = await chat.sendMessageStream(userInput); // Pass userInput directly
+    for await (const chunk of result.stream) { // Iterate over result.stream
+      const chunkText = chunk.text(); // Call chunk.text() as a function
       if (typeof chunkText === 'string') {
          await displayMessage(chunkText, 'ai', true);
       }
