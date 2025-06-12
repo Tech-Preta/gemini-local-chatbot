@@ -4,7 +4,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { GoogleGenAI, Chat } from '@google/genai';
+-import { GoogleGenAI, Chat } from '@google/genai';
++import { GoogleGenerativeAI } from '@google/generativeai';
 import { marked } from 'marked';
 
 // Extend the Window interface to include API_KEY
